@@ -1,0 +1,16 @@
+<input type="file" accept="image/*" onchange="displayImage(event)">
+<br>
+<img id="outputImage" style="max-width: 300px; margin-top: 10px;">
+
+<script>
+  function displayImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('outputImage').src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
