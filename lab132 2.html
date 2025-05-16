@@ -1,0 +1,17 @@
+<input type="file" accept=".html" onchange="displayHTML(event)">
+<script>
+  function displayHTML(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const div = document.createElement('div');
+        div.innerHTML = e.target.result;
+        div.style.border = '1px solid #ccc';
+        div.style.padding = '10px';
+        document.body.appendChild(div);
+      };
+      reader.readAsText(file);
+    }
+  }
+</script>
