@@ -1,0 +1,27 @@
+<input type="file" accept=".csv" onchange="displayCSV(event)">
+<script>
+  function displayCSV(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const lines = e.target.result.split('\n');
+        const table = document.createElement('table');
+        table.style.borderCollapse = 'collapse';
+        lines.forEach(line => {
+          const row = document.createElement('tr');
+          line.split(',').forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell.trim();
+            td.style.border = '1px solid #000';
+            td.style.padding = '5px';
+            row.appendChild(td);
+          });
+          table.appendChild(row);
+        });
+        document.body.appendChild(table);
+      };
+      reader.readAsText(file);
+    }
+  }
+</script>
